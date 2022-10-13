@@ -12,6 +12,9 @@ public class MyHashMapTest {
         hashMap.put("Fred", 11);
         hashMap.put("Bill", 87);
         hashMap.put("Frank", 46);
+        hashMap.put("Frank", 47);
+        hashMap.put("Frank", 48);
+        hashMap.put("Bill", 48);
 
         System.out.println(hashMap.toString());
         System.out.println(hashMap.size());

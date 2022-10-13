@@ -18,13 +18,16 @@ public class MyHashMap<K, V> {
             Node<K, V> next = table[bucket];
             while (next.next != null) {
                 if (next.key == key || next.key.equals(key)) {
-                    table[bucket].setValue(value);
                     break;
                 }
                 nodeCount++;
                 next = next.next;
             }
-            next.next = new Node<K, V>(hash, key, value, null);
+            if (next.key == key || next.key.equals(key)) {
+                table[bucket].setValue(value);
+            } else {
+                next.next = new Node<K, V>(hash, key, value, null);
+            }
         }
 
         if (nodeCount == BUCKET_SIZE || 100f / (table.length * BUCKET_SIZE) * size() >= DEFAULT_LOAD_FACTORY) {
@@ -47,7 +50,7 @@ public class MyHashMap<K, V> {
         throw new IllegalArgumentException("No such key exists");
     }
 
-    public void remove(K key) {
+        public void remove(K key) {
         int hash = hash(key);
         int bucket = (table.length - 1) & hash;
         Node<K, V> node = table[bucket];
